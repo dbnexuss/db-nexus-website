@@ -10,23 +10,28 @@ body {
     color: white;
 }
 
+.container {
+    width: 80%; /* Center the content */
+    max-width: 1200px; /* Maximum width for larger screens */
+    margin: 0 auto; /* Centering */
+}
+
 header {
     background: rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 20px 0;
 }
 
 .logo {
     font-size: 24px;
     font-weight: bold;
     color: #ff6f00; /* Orange */
+    float: left; /* Align logo to left */
 }
 
 nav ul {
     list-style: none;
     display: flex;
+    justify-content: flex-end; /* Align nav to the right */
 }
 
 nav ul li {
@@ -83,7 +88,8 @@ section {
 
 .project-list {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Wrap items on smaller screens */
 }
 
 .project-item {
@@ -91,12 +97,16 @@ section {
     padding: 20px;
     border-radius: 5px;
     width: 30%;
+    margin: 10px 0; /* Margin for spacing */
     text-align: center;
     transition: transform 0.3s;
+    opacity: 0; /* Start with opacity 0 for animation */
+    transform: translateY(20px); /* Start slightly lower for animation */
 }
 
-.project-item:hover {
-    transform: scale(1.05);
+.project-item.visible {
+    opacity: 1; /* Fade in */
+    transform: translateY(0); /* Move up */
 }
 
 .testimonials blockquote {
@@ -134,4 +144,11 @@ footer {
     text-align: center;
     padding: 20px 0;
     background: rgba(0, 0, 0, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .project-item {
+        width: 100%; /* Full width on smaller screens */
+    }
 }
