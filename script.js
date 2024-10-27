@@ -1,23 +1,16 @@
-document.addEventListener("scroll", function() {
-    const projects = document.querySelectorAll(".project-item");
-    projects.forEach((project, index) => {
-        const scrollPosition = window.scrollY + window.innerHeight;
-        const projectPosition = project.getBoundingClientRect().top + window.scrollY;
-        
-        if (scrollPosition > projectPosition + 100) {
-            project.style.transform = "translateY(0)";
-            project.style.opacity = "1";
-        } else {
-            project.style.transform = "translateY(50px)";
-            project.style.opacity = "0";
-        }
-    });
-});
+document.addEventListener("DOMContentLoaded", function () {
+    const projectItems = document.querySelectorAll(".project-item");
 
-// Initialize styles for animations
-const projectItems = document.querySelectorAll(".project-item");
-projectItems.forEach(item => {
-    item.style.transform = "translateY(50px)";
-    item.style.opacity = "0";
-    item.style.transition = "transform 0.5s ease, opacity 0.5s ease";
+    function reveal() {
+        const scrollPosition = window.scrollY + window.innerHeight;
+        projectItems.forEach(item => {
+            const itemPosition = item.getBoundingClientRect().top + window.scrollY;
+            if (scrollPosition > itemPosition + 100) {
+                item.classList.add("visible");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", reveal);
+    reveal(); // Initial check for items already in view
 });
