@@ -1,23 +1,23 @@
-// Smooth scroll to sections
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+document.addEventListener("scroll", function() {
+    const projects = document.querySelectorAll(".project-item");
+    projects.forEach((project, index) => {
+        const scrollPosition = window.scrollY + window.innerHeight;
+        const projectPosition = project.getBoundingClientRect().top + window.scrollY;
+        
+        if (scrollPosition > projectPosition + 100) {
+            project.style.transform = "translateY(0)";
+            project.style.opacity = "1";
+        } else {
+            project.style.transform = "translateY(50px)";
+            project.style.opacity = "0";
+        }
     });
 });
 
-// Optional: Skeleton Screen Effect (Example)
-const sections = document.querySelectorAll('.section');
-sections.forEach(section => {
-    const skeleton = document.createElement('div');
-    skeleton.className = 'skeleton';
-    section.appendChild(skeleton);
-
-    // Remove skeleton after 1 second (simulate loading)
-    setTimeout(() => {
-        skeleton.remove();
-    }, 1000);
+// Initialize styles for animations
+const projectItems = document.querySelectorAll(".project-item");
+projectItems.forEach(item => {
+    item.style.transform = "translateY(50px)";
+    item.style.opacity = "0";
+    item.style.transition = "transform 0.5s ease, opacity 0.5s ease";
 });
